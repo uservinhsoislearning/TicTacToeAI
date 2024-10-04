@@ -18,8 +18,8 @@ public class Minesweeper {
     int tileSize = 70;
     int numRows = 8;
     int numCols = numRows;
-    int boardWidth = 1920; //change here
-    int boardHeight = 1080;
+    int boardWidth = 800; //change here
+    int boardHeight = 800;
     
     JFrame frame = new JFrame("Minesweeper");
     JLabel textLabel = new JLabel();
