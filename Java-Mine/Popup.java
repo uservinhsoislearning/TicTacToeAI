@@ -2,32 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Popup extends Frame{
-      private TextField tfInput;
-      private TextField tfOutput;
+public class Popup{
+      private JFrame textFrame;
       public Popup(){
-            setLayout(new GridLayout(2,2));
-            add(new Label("Enter something:"));
+            textFrame = new JFrame("Minesweeper");
+            textFrame.setSize(350,120);
+            textFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            textFrame.setResizable(false);
+            textFrame.setLocationRelativeTo(null);
 
-            tfInput = new TextField(10);
-            add(tfInput);
-            tfInput.addActionListener(new TFInputListener());
+            JPanel panel = new JPanel(new GridLayout(2,2));
+            panel.add(new Label("Enter the size of your board"));
+            panel.add(new JTextField());
+            panel.add(new Label("Enter the number of bombs"));
+            panel.add(new JTextField());
 
-            tfOutput = new TextField(10);
-            tfOutput.setEditable(false);
-            add(tfOutput);
-
-            setTitle("I love your mom");
-            setSize(350, 120);
-            setVisible(true);
-      }
-
-      private class TFInputListener implements ActionListener {
-            @Override
-            public void actionPerfromed(ActionEvent event){
-                  String inp = tfInput.getText();
-                  tfInput.setText(inp);
-                  tfOutput.setText(inp);
-            }
+            // Adding the panel in the end after completed everything.
+            textFrame.add(panel);
+            textFrame.setVisible(true);
       }
 }
