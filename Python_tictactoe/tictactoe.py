@@ -12,7 +12,7 @@ board = np.zeros((CONST.BOARD_ROWS,CONST.BOARD_COLS))
 
 def draw_lines(color=CONST.BLACK):
     for i in range(1, CONST.BOARD_ROWS):
-        pygame.draw.line(screen, color, (0,CONST.CELL_SIZE*i), (WIDTH, CONST.CELL_SIZE*i),  CONST.LINE_WIDTH)
+        pygame.draw.line(screen, color, (0,CONST.CELL_SIZE*i), (CONST.WIDTH, CONST.CELL_SIZE*i),  CONST.LINE_WIDTH)
         pygame.draw.line(screen, color, (CONST.CELL_SIZE*i, 0), (CONST.CELL_SIZE*i, CONST.HEIGHT),  CONST.LINE_WIDTH)
 
 def draw_figures(color=CONST.BLACK):
