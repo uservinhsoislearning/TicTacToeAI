@@ -76,7 +76,7 @@ def best_move():
         for col in range(CONST.BOARD_COLS):
             if board[row][col] == 0:
                 board[row][col] = 2
-                solver = ms.Solver().Minimax(board, 0, False)
+                solver = ms.Minimax(board, 0, False)
                 score = solver.solve()
                 board[row][col] = 0
                 if score > best_score:
