@@ -1,5 +1,5 @@
 class Solver:
-    def __init__(self, name='minimax'):
+    def __init__(self, name='minimax', ):
         if name == 'minimax':
             self.minimax_board
             self.depth
