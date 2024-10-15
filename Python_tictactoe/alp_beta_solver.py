@@ -48,4 +48,21 @@ class AlphaBeta:
             return best_score
         
     def best_move(self):
+        best_score = -1000
+        move = (-1,-1)
+        for row in range(CONST.BOARD_ROWS):
+            for col in range(CONST.BOARD_COLS):
+                if tictactoe.board[row][col] == 0:
+                    tictactoe.board[row][col] = 2
+                    solver = AlphaBeta(tictactoe.board, 0, False, -1000, 1000)
+                    score = solver.solve()
+                    tictactoe.board[row][col] = 0
+                    if score > best_score:
+                        best_score = score
+                        move = (row,col)
+                    self.alpha = max(self.alpha, score)
         
+        if move != (-1,-1):
+            tictactoe.mark_square(move[0], move[1], 2)
+            return True
+        return False
