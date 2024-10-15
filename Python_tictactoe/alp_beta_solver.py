@@ -54,7 +54,7 @@ class AlphaBeta:
             for col in range(CONST.BOARD_COLS):
                 if tictactoe.board[row][col] == 0:
                     tictactoe.board[row][col] = 2
-                    solver = AlphaBeta(tictactoe.board, 0, False, -1000, 1000)
+                    solver = AlphaBeta(tictactoe.board, 0, False, self.alpha, self.beta)
                     score = solver.solve()
                     tictactoe.board[row][col] = 0
                     if score > best_score:

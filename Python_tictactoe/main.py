@@ -1,6 +1,7 @@
 import constants as CONST
 import tictactoe
 import minimax_solver as ms
+import alp_beta_solver as abs
 import pygame
 import sys
 
@@ -9,6 +10,7 @@ tictactoe.draw_lines()
 player = 1
 game_over = False
 minimaxSolver = ms.Minimax(tictactoe.board, 0 , False)
+alphaBetaSolver = abs.AlphaBeta(tictactoe.board, 0, False, 0, 0)
 
 while True:
     for event in pygame.event.get():
@@ -26,7 +28,7 @@ while True:
                 player = player % 2 + 1
 
                 if not game_over:
-                    if minimaxSolver.best_move():
+                    if alphaBetaSolver.best_move():
                         if tictactoe.check_win(2):
                             game_over = True
                         player = player % 2 + 1
