@@ -39,3 +39,22 @@ class Minimax:
                         self.minimax_board[row][col] = 0
                         best_score = min(score, best_score)
             return best_score
+    
+    def best_move(self):
+        best_score = -1000
+        move = (-1,-1)
+        for row in range(CONST.BOARD_ROWS):
+            for col in range(CONST.BOARD_COLS):
+                if tictactoe.board[row][col] == 0:
+                    tictactoe.board[row][col] = 2
+                    solver = Minimax(tictactoe.board, 0, False)
+                    score = solver.solve()
+                    tictactoe.board[row][col] = 0
+                    if score > best_score:
+                        best_score = score
+                        move = (row,col)
+
+        if move != (-1,-1):
+            tictactoe.mark_square(move[0], move[1], 2)
+            return True
+        return False

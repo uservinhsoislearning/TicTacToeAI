@@ -1,5 +1,6 @@
 import constants as CONST
 import tictactoe
+import minimax_solver as ms
 import pygame
 import sys
 
@@ -7,6 +8,7 @@ tictactoe.draw_lines()
 
 player = 1
 game_over = False
+minimaxSolver = ms.Minimax(tictactoe.board, 0 , False)
 
 while True:
     for event in pygame.event.get():
@@ -24,7 +26,7 @@ while True:
                 player = player % 2 + 1
 
                 if not game_over:
-                    if tictactoe.best_move():
+                    if minimaxSolver.best_move():
                         if tictactoe.check_win(2):
                             game_over = True
                         player = player % 2 + 1
