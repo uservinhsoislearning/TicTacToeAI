@@ -1,7 +1,6 @@
 import pygame
 import numpy as np
 import constants as CONST
-import minimax_solver as ms
 
 pygame.init()
 
@@ -98,6 +97,25 @@ def check_win(player, check_board=board):
 #                     best_score = min(score, best_score)
 #         return best_score
 
+# def best_move():
+#     best_score = -1000
+#     move = (-1,-1)
+#     for row in range(CONST.BOARD_ROWS):
+#         for col in range(CONST.BOARD_COLS):
+#             if board[row][col] == 0:
+#                 board[row][col] = 2
+#                 solver = ms.Minimax(board, 0, False)
+#                 score = solver.solve()
+#                 board[row][col] = 0
+#                 if score > best_score:
+#                     best_score = score
+#                     move = (row,col)
+
+#     if move != (-1,-1):
+#         mark_square(move[0], move[1], 2)
+#         return True
+#     return False
+
 # def ABbest_move():
 #   best_score = float('-inf')
 #   alpha = float('-inf')
@@ -153,25 +171,6 @@ def check_win(player, check_board=board):
 #           if beta <= alpha:  # Prune branch if beta <= alpha
 #             break
 #     return best_score
-
-def best_move():
-    best_score = -1000
-    move = (-1,-1)
-    for row in range(CONST.BOARD_ROWS):
-        for col in range(CONST.BOARD_COLS):
-            if board[row][col] == 0:
-                board[row][col] = 2
-                solver = ms.Minimax(board, 0, False)
-                score = solver.solve()
-                board[row][col] = 0
-                if score > best_score:
-                    best_score = score
-                    move = (row,col)
-
-    if move != (-1,-1):
-        mark_square(move[0], move[1], 2)
-        return True
-    return False
 
 def restart_game():
     screen.fill(CONST.WHITE)
