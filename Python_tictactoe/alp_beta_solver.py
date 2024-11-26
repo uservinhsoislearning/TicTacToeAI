@@ -27,7 +27,7 @@ class AlphaBeta:
                         self.is_max = False
                         score = self.solve()
                         best_score = max(score, best_score)
-                        self.alpha = max(self.alpha, score)
+                        self.alpha = max(self.alpha, best_score)
                         if self.beta <= self.alpha:
                             break
             return best_score
@@ -42,7 +42,7 @@ class AlphaBeta:
                         self.is_max = True
                         score = self.solve()
                         best_score = min(score, best_score)
-                        self.beta = min(self.alpha, score)
+                        self.beta = min(self.beta, best_score)
                         if self.beta <= self.alpha:
                             break
             return best_score
