@@ -10,7 +10,7 @@ tictactoe.draw_lines()
 player = 1
 game_over = False
 minimaxSolver = ms.Minimax(tictactoe.board, 0 , False)
-alphaBetaSolver = abs.AlphaBeta(tictactoe.board, 0, False, 0, 0)
+alphaBetaSolver = abs.AlphaBeta(tictactoe.board, 0, False, -1000, 1000)
 
 while True:
     for event in pygame.event.get():
