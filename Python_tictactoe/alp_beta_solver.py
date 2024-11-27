@@ -24,7 +24,9 @@ class AlphaBeta:
                 for col in range(CONST.BOARD_COLS):
                     if self.AB_board[row][col] == 0:
                         new_board = copy.deepcopy(self.AB_board)
+                        new_board[row][col] = 2
                         score = AlphaBeta(new_board, self.depth + 1, False, self.alpha, self.beta).solve()
+                        new_board[row][col] = 0
                         best_score = max(score, best_score)
                         self.alpha = max(self.alpha, best_score)
                         if self.beta <= self.alpha:
@@ -37,8 +39,9 @@ class AlphaBeta:
                 for col in range(CONST.BOARD_COLS):
                     if self.AB_board[row][col] == 0:
                         new_board = copy.deepcopy(self.AB_board)
-                        new_board[row][col] = 2
-                        score = AlphaBeta(new_board, self.depth + 1, False, self.alpha, self.beta).solve()
+                        new_board[row][col] = 1
+                        score = AlphaBeta(new_board, self.depth + 1, True, self.alpha, self.beta).solve()
+                        new_board[row][col] = 0
                         best_score = min(score, best_score)
                         self.beta = min(self.beta, best_score)
                         if self.beta <= self.alpha:
@@ -46,15 +49,14 @@ class AlphaBeta:
             return best_score
         
     def best_move(self):
-        best_score = -1000
-        self.alpha = -1000
-        self.beta = 1000
+        best_score = CONST.MIN
+        self.alpha = CONST.MIN
+        self.beta = CONST.MAX
         move = (-1,-1)
         for row in range(CONST.BOARD_ROWS):
             for col in range(CONST.BOARD_COLS):
                 if tictactoe.board[row][col] == 0:
-                    new_board = copy.deepcopy(tictactoe.board)
-                    new_board[row][col] = 2
+                    tictactoe.board[row][col] = 2
                     solver = AlphaBeta(tictactoe.board, 0, False, self.alpha, self.beta)
                     score = solver.solve()
                     tictactoe.board[row][col] = 0
