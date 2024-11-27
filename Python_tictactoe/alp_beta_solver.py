@@ -19,7 +19,7 @@ class AlphaBeta:
             return 0
         
         if self.is_max:
-            best_score = -100000
+            best_score = CONST.MIN
             for row in range(CONST.BOARD_ROWS):
                 for col in range(CONST.BOARD_COLS):
                     if self.AB_board[row][col] == 0:
@@ -32,7 +32,7 @@ class AlphaBeta:
             return best_score
         
         else:
-            best_score = 100000
+            best_score = CONST.MAX
             for row in range(CONST.BOARD_ROWS):
                 for col in range(CONST.BOARD_COLS):
                     if self.AB_board[row][col] == 0:
