@@ -15,7 +15,7 @@ alphaBetaSolver = abs.AlphaBeta(tictactoe.board, 0, False, CONST.MIN, CONST.MAX)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sys.exit
+            sys.exit()
 
         if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
             mouseX = event.pos[0] // CONST.CELL_SIZE
