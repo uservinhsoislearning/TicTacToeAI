@@ -16,7 +16,7 @@ class Minimax:
             return 0
 
         if self.is_max: # If best what should com do ?
-            best_score = -1000
+            best_score = CONST.MIN
             for row in range(CONST.BOARD_ROWS):
                 for col in range(CONST.BOARD_COLS):
                     if self.minimax_board[row][col] == 0:
@@ -28,7 +28,7 @@ class Minimax:
                         best_score = max(score, best_score)
             return best_score
         else:
-            best_score = 1000
+            best_score = CONST.MAX
             for row in range(CONST.BOARD_ROWS):
                 for col in range(CONST.BOARD_COLS):
                     if self.minimax_board[row][col] == 0:
@@ -41,7 +41,7 @@ class Minimax:
             return best_score
     
     def best_move(self):
-        best_score = -1000
+        best_score = CONST.MIN
         move = (-1,-1)
         for row in range(CONST.BOARD_ROWS):
             for col in range(CONST.BOARD_COLS):
