@@ -1,96 +1,47 @@
-import constants as CONST
-import tictactoe
-import minimax_solver as ms
-import alp_beta_solver as abs
 import pygame
-import sys
-import time
-import tkinter as tk 
+import numpy as np
+import constants as CONST
 
-def firstWindow():  
-   number_map = {1 : "Minimax", 2: "Alpha-Beta Pruning"}
+pygame.init()
 
-   def selection():  
-      selection = "You selected the option " + str(number_map[radio.get()])  
-      label.config(text = selection)
-      time.sleep(3)
-      top.quit()
-   
-   top = tk.Tk()  
-   top.geometry("300x150")  
-   radio = tk.IntVar()  
-   lbl = tk.Label(text = "Choose your desired algorithms:")  
-   lbl.pack()  
-   R1 = tk.Radiobutton(top, text="Minimax", variable=radio, value=1,  
-                     command=selection)  
-   R1.pack( anchor = tk.W )  
-   
-   R2 = tk.Radiobutton(top, text="Alpha-Beta Pruning", variable=radio, value=2,  
-                     command=selection)  
-   R2.pack( anchor = tk.W )  
-   
-   # R3 = tk.Radiobutton(top, text="Java", variable=radio, value=3,  
-   #                   command=selection)  
-   # R3.pack( anchor = tk.W)  
+screen = pygame.display.set_mode((CONST.WINDOW_WIDTH, CONST.WINDOW_HEIGHT))
+pygame.display.set_caption("Choose your desired algorithm")
 
-   label = tk.Label(top)  
-   label.pack()  
-   top.mainloop()
+# Button positions
+button_1_rect = pygame.Rect((CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH - CONST.BUTTON_MARGIN, CONST.WINDOW_HEIGHT // 2 - CONST.BUTTON_HEIGHT // 2), 
+                            (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
+button_2_rect = pygame.Rect((CONST.WINDOW_WIDTH // 2 + CONST.BUTTON_MARGIN, CONST.WINDOW_HEIGHT // 2 - CONST.BUTTON_HEIGHT // 2), 
+                            (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
 
-   return radio.get()
+# Selected solver (None initially)
+selected_solver = None
 
-def secondWindow(value):
-   tictactoe.draw_lines()
+# Main loop
+running = True
+while running:
+    screen.fill(CONST.WHITE)
 
-   player = 1
-   game_over = False
-   if value == 1:
-      Solver = ms.Minimax(tictactoe.board, 0 , False)
-   else:
-      Solver = abs.AlphaBeta(tictactoe.board, 0, False, CONST.MIN, CONST.MAX)
+    # Draw buttons
+    pygame.draw.rect(screen, CONST.BLUE if selected_solver == "Minimax" else CONST.BLACK, button_1_rect, 2)
+    pygame.draw.rect(screen, CONST.RED if selected_solver == "AlphaBeta" else CONST.BLACK, button_2_rect, 2)
 
-   while True:
-      for event in pygame.event.get():
-         if event.type == pygame.QUIT:
-               sys.exit()
+    # Button text
+    text_1 = CONST.FONT.render("Minimax", True, CONST.BLACK)
+    text_2 = CONST.FONT.render("AlphaBeta", True, CONST.BLACK)
+    screen.blit(text_1, (button_1_rect.centerx - text_1.get_width() // 2, button_1_rect.centery - text_1.get_height() // 2))
+    screen.blit(text_2, (button_2_rect.centerx - text_2.get_width() // 2, button_2_rect.centery - text_2.get_height() // 2))
 
-         if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
-               mouseX = event.pos[0] // CONST.CELL_SIZE
-               mouseY = event.pos[1] // CONST.CELL_SIZE
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-               if tictactoe.available_square(mouseY, mouseX):
-                  tictactoe.mark_square(mouseY, mouseX, player)
-                  if tictactoe.check_win(player):
-                     game_over = True
-                  player = player % 2 + 1
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if button_1_rect.collidepoint(event.pos):
+                selected_solver = "Minimax"
+                print("Minimax solver selected.")
+            elif button_2_rect.collidepoint(event.pos):
+                selected_solver = "AlphaBeta"
+                print("AlphaBeta solver selected.")
 
-                  if not game_over:
-                     if Solver.best_move():
-                           if tictactoe.check_win(2):
-                              game_over = True
-                           player = player % 2 + 1
-
-                  if not game_over:
-                     if tictactoe.is_board_full():
-                           game_over = True
-
-         if event.type == pygame.KEYDOWN:
-               if event.key == pygame.K_r:
-                  tictactoe.restart_game()
-                  game_over = False
-                  player = 1
-
-      if not game_over:
-         tictactoe.draw_figures()
-      else:
-         if tictactoe.check_win(1):
-               tictactoe.draw_figures(CONST.GREEN)
-               tictactoe.draw_lines(CONST.GREEN)
-         elif tictactoe.check_win(2):
-               tictactoe.draw_figures(CONST.RED)
-               tictactoe.draw_lines(CONST.RED)
-         else:
-               tictactoe.draw_figures(CONST.BLUE)
-               tictactoe.draw_figures(CONST.BLUE)
-
-      pygame.display.update()
+    # Update display
+    pygame.display.update()
