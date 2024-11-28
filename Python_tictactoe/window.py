@@ -4,30 +4,34 @@ import minimax_solver as ms
 import alp_beta_solver as abs
 import pygame
 import sys
+import time
 import tkinter as tk 
 
 def firstWindow():  
+   number_map = {1 : "Minimax", 2: "Alpha-Beta Pruning"}
+
    def selection():  
-      selection = "You selected the option " + str(radio.get())  
+      selection = "You selected the option " + str(number_map[radio.get()])  
       label.config(text = selection)
+      time.sleep(3)
       top.quit()
    
    top = tk.Tk()  
    top.geometry("300x150")  
    radio = tk.IntVar()  
-   lbl = tk.Label(text = "Favourite programming language:")  
+   lbl = tk.Label(text = "Choose your desired algorithms:")  
    lbl.pack()  
-   R1 = tk.Radiobutton(top, text="C", variable=radio, value=1,  
+   R1 = tk.Radiobutton(top, text="Minimax", variable=radio, value=1,  
                      command=selection)  
    R1.pack( anchor = tk.W )  
    
-   R2 = tk.Radiobutton(top, text="C++", variable=radio, value=2,  
+   R2 = tk.Radiobutton(top, text="Alpha-Beta Pruning", variable=radio, value=2,  
                      command=selection)  
    R2.pack( anchor = tk.W )  
    
-   R3 = tk.Radiobutton(top, text="Java", variable=radio, value=3,  
-                     command=selection)  
-   R3.pack( anchor = tk.W)  
+   # R3 = tk.Radiobutton(top, text="Java", variable=radio, value=3,  
+   #                   command=selection)  
+   # R3.pack( anchor = tk.W)  
 
    label = tk.Label(top)  
    label.pack()  
