@@ -5,7 +5,6 @@ import constants as CONST
 pygame.init()
 
 screen = pygame.display.set_mode((CONST.GWINDOW_WIDTH, CONST.GWINDOW_HEIGHT))
-pygame.display.set_caption('Tic Tac Toe')
 screen.fill(CONST.WHITE)
 
 board = np.zeros((CONST.BOARD_ROWS,CONST.BOARD_COLS))
