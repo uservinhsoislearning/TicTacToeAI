@@ -1,6 +1,7 @@
 import numpy as np
 from copy import deepcopy
 import tictactoe
+import matplotlib.pyplot as plt
 import constants as CONST
 
 class policy():
@@ -108,9 +109,9 @@ class VanilaMCTS():
     def _is_terminal(self, leaf_state):
         def __who_wins(leaf_state):
             if tictactoe.check_win(1,check_board=leaf_state):
-                return 'o'
+                return 1
             if tictactoe.check_win(2,check_board=leaf_state):
-                return 'x'
+                return 2
             return None
 
         def __is_terminal_in_conv(leaf_state):
@@ -176,11 +177,10 @@ class VanilaMCTS():
         return winner
 
     def backprop(self, child_node_id, winner):
-        player = deepcopy(self.tree[(0,)]['player'])
 
         if winner == 'draw':
             reward = 0
-        elif winner == player:
+        elif winner == 2:
             reward = 1
         else:
             reward = -1
@@ -227,14 +227,43 @@ class VanilaMCTS():
                 best_q = q
                 best_action = a
         
+        print('\n----------------------')
+        print(' [-] game board: ')
+        for row in self.tree[(0,)]['state']:
+            print (row)
+        print(' [-] person to play: ', self.tree[(0,)]['player'])
+        print('\n [-] best_action: %d' % best_action)
+        print(' best_q = %.2f' % (best_q))
+        print(' [-] searching depth = %d' % (depth_searched))
+
+        # FOR DEBUGGING
+        fig = plt.figure(figsize=(5,5))
+        for a in action_candidates:
+            # print('a= ', a)
+            _node = self.tree[(0,)+(a,)]
+            _state = deepcopy(_node['state'])
+
+            _q = _node['q']
+
+            plt.subplot(len(_state),len(_state),a+1)
+            plt.pcolormesh(_state, alpha=0.7, cmap="RdBu")
+            plt.axis('equal')
+            plt.gca().invert_yaxis()
+            plt.xticks([], [])
+            plt.yticks([], [])
+            plt.title('[%d] q=%.2f' % (a,_q))
+        plt.draw()
+        plt.waitforbuttonpress(0)
+        plt.close(fig)
+
         action = np.zeros([9])
         action[best_action] = 1
+        print(action)
         if np.any(action) != 0:
             action_index = np.argmax(action)
             move = (int(action_index / 3), action_index % 3)
 
         if move != (-1,-1):
-            print(move)
             tictactoe.mark_square(move[0], move[1], 2)
             print("Move played!\n")
             return True

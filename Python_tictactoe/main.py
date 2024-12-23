@@ -14,7 +14,7 @@ tictactoe.draw_lines()
 player = 1
 game_over = False
 # if value == "Minimax":
-#    Solver = ms.Minimax(tictactoe.board, 0 , False)
+# Solver = ms.Minimax(tictactoe.board, 0 , False)
 # else:
 
 Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=2)
@@ -49,7 +49,6 @@ while True:
       if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
                tictactoe.restart_game()
-               Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=2)
                game_over = False
                player = 1
 
