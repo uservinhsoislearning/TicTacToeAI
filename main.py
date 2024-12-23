@@ -3,7 +3,7 @@ import tictactoe
 import window
 import minimax_solver as ms
 import alp_beta_solver as abs
-import newMCTS as mts
+import MCTS as mts
 import pygame
 import sys
 
