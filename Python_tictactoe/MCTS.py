@@ -48,7 +48,7 @@ def simulate_random_game(board, player):
     while not tictactoe.check_win(1, current_board) and not tictactoe.check_win(2, current_board) and not tictactoe.is_board_full(current_board):
         move = rollout_policy(current_board, current_player)
         current_board = make_move(current_board, move, current_player)
-        current_player = 3 - current_player
+        current_player = current_player % 2 + 1
     if tictactoe.check_win(player, current_board):
         return 1
     elif tictactoe.check_win(3 - player, current_board):
@@ -94,19 +94,14 @@ def mcts(root, iterations):
     return root.best_child(0)  # Return the best move after exploration
 
 class MCTS:
-    def __init__(self, iterations=1000):
+    def __init__(self, iterations=50):
         self.iterations = iterations
 
-    def best_move(self, board=tictactoe.board, player=2):
-        root = Node(copy.deepcopy(board), player= 3 - player)
+    def best_move(self, board=tictactoe.board, player= 2):
+        root = Node(board, player= player)
         best_child = mcts(root, self.iterations)
         for move in get_available_moves(board):
             if np.array_equal(make_move(board, move, player), best_child.state):
                 tictactoe.mark_square(move[0], move[1], 2)
                 return True
         return False
-
-# Example usage in the game loop:
-# solver = MCTS()
-# best_move = solver.best_move(board, current_player)
-# mark_square(best_move[0], best_move[1], current_player)
