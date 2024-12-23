@@ -3,19 +3,20 @@ import tictactoe
 import window
 import minimax_solver as ms
 import alp_beta_solver as abs
+import MCTS as mts
 import pygame
 import sys
 
-value = window.GUI()
+# value = window.GUI()
 
 tictactoe.draw_lines()
 
 player = 1
 game_over = False
-if value == "Minimax":
-   Solver = ms.Minimax(tictactoe.board, 0 , False)
-else:
-   Solver = abs.AlphaBeta(tictactoe.board, 0, False, CONST.MIN, CONST.MAX)
+# if value == "Minimax":
+#    Solver = ms.Minimax(tictactoe.board, 0 , False)
+# else:
+Solver = mts.MCTS()
 
 while True:
    for event in pygame.event.get():
