@@ -7,15 +7,16 @@ import newMCTS as mts
 import pygame
 import sys
 
-# value = window.GUI()
+value = window.GUI()
 
 tictactoe.draw_lines()
 
 player = 1
 game_over = False
-# if value == "Minimax":
-# Solver = ms.Minimax(tictactoe.board, 0 , False)
-# else:
+if value == "Minimax":
+    Solver = ms.Minimax(tictactoe.board, 0 , False)
+elif value == "AlphaBeta":
+    Solver = abs.AlphaBeta()
 
 Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=2)
 
