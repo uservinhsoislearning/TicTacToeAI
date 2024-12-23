@@ -3,6 +3,7 @@ import tictactoe
 import window
 import minimax_solver as ms
 import alp_beta_solver as abs
+import newMCTS as mts
 import pygame
 import sys
 
@@ -13,9 +14,13 @@ tictactoe.draw_lines()
 player = 1
 game_over = False
 if value == "Minimax":
-   Solver = ms.Minimax(tictactoe.board, 0 , False)
+    Solver = ms.Minimax(tictactoe.board, 0 , False)
+elif value == "AlphaBeta":
+    Solver = abs.AlphaBeta(tictactoe.board, 0, False, CONST.MIN, CONST.MAX)
+elif value == "MCTS":
+    Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=2)
 else:
-   Solver = abs.AlphaBeta(tictactoe.board, 0, False, CONST.MIN, CONST.MAX)
+    pass
 
 while True:
    for event in pygame.event.get():
@@ -34,6 +39,8 @@ while True:
 
                if not game_over:
                   if Solver.best_move():
+                        if value == "MCTS":
+                           Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=player)
                         if tictactoe.check_win(2):
                            game_over = True
                         player = player % 2 + 1
