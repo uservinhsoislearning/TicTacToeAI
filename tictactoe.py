@@ -47,24 +47,19 @@ def is_board_full(check_board=board):
         for col in range(CONST.BOARD_COLS):
             if check_board[row][col] == 0:
                 return False
-            
     return True
 
 def check_win(player, check_board=board):
     for col in range(CONST.BOARD_COLS):
         if check_board[0][col] == player and check_board[1][col] == player and check_board[2][col] == player:
-            return True
-        
+            return True    
     for row in range(CONST.BOARD_ROWS):
         if check_board[row][0] == player and check_board[row][1] == player and check_board[row][2] == player:
-            return True
-        
+            return True    
     if check_board[0][0] == player and check_board[1][1] == player and check_board[2][2] == player:
         return True
-    
     if check_board[2][0] == player and check_board[1][1] == player and check_board[0][2] == player:
         return True
-
     return False
 
 def restart_game():
