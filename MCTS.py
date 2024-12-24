@@ -1,7 +1,6 @@
 import numpy as np
 import copy
 import tictactoe
-import matplotlib.pyplot as plt
 import constants as CONST
 
 class policy():
@@ -91,7 +90,7 @@ class VanilaMCTS():
                     state[action] = 1
                 else:
                     next_turn = 1
-                    state[action] = -1
+                    state[action] = 2
 
                 child_id = leaf_node_id + (action_idx, )
                 childs.append(child_id)
@@ -168,7 +167,7 @@ class VanilaMCTS():
 
                 if previous_player == 1:
                     current_player = 2
-                    state[action] = -1
+                    state[action] = 2
                 else:
                     current_player = 1
                     state[action] = 1
