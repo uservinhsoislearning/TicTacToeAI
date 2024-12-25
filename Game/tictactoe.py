@@ -1,6 +1,6 @@
-import pygame
-import numpy as np
 import constants as CONST
+import numpy as np
+import pygame
 
 pygame.init()
 

@@ -1,5 +1,5 @@
-import tictactoe
 import constants as CONST
+import Game.tictactoe as tictactoe
 
 class Minimax:
     def __init__(self, minimax_board, depth, is_max):
@@ -8,6 +8,17 @@ class Minimax:
         self.is_max = is_max
 
     def solve(self):
+        '''Implementing MiniMax algorithm using recursion.
+        
+        Base cases:
+
+        - Player 1 (human) wins: return -infinity score.
+
+        - Player 2 (computer) wins: return infinity score.
+
+        - Draws: return 0
+
+        '''
         if tictactoe.check_win(2, self.minimax_board):
             return float('inf')
         elif tictactoe.check_win(1, self.minimax_board):
@@ -15,7 +26,7 @@ class Minimax:
         elif tictactoe.is_board_full(self.minimax_board):
             return 0
 
-        if self.is_max: # If best what should com do ?
+        if self.is_max:
             best_score = CONST.MIN
             for row in range(CONST.BOARD_ROWS):
                 for col in range(CONST.BOARD_COLS):
@@ -41,6 +52,7 @@ class Minimax:
             return best_score
     
     def best_move(self):
+        '''Play the best move according to the selected algorithm'''
         best_score = CONST.MIN
         move = (-1,-1)
         for row in range(CONST.BOARD_ROWS):

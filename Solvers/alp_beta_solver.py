@@ -1,6 +1,6 @@
-import copy 
-import tictactoe
 import constants as CONST
+import Game.tictactoe as tictactoe
+import copy 
 
 class AlphaBeta:
     def __init__(self, AB_board, depth, is_max, alpha, beta):
@@ -11,6 +11,17 @@ class AlphaBeta:
         self.beta = beta
 
     def solve(self):
+        '''Implementing Alpha-Beta pruning algorithm using recursion.
+        
+        Base cases:
+
+        - Player 1 (human) wins: return -infinity score.
+
+        - Player 2 (computer) wins: return infinity score.
+
+        - Draws: return 0
+
+        '''
         if tictactoe.check_win(2, self.AB_board):
             return float('inf')
         elif tictactoe.check_win(1, self.AB_board):
@@ -49,6 +60,7 @@ class AlphaBeta:
             return best_score
         
     def best_move(self):
+        '''Play the best move according to the selected algorithm'''
         best_score = CONST.MIN
         self.alpha = CONST.MIN
         self.beta = CONST.MAX

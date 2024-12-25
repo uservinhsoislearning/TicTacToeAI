@@ -1,7 +1,7 @@
-import numpy as np
-import copy
-import tictactoe
 import constants as CONST
+import Game.tictactoe as tictactoe
+import copy
+import numpy as np
 
 class policy():
     def __init__(self):
@@ -37,7 +37,8 @@ class VanilaMCTS():
                           'q': None}}
         return tree
 
-    def selection(self): #find the best child node in the tree.
+    def selection(self):
+        '''Find the best child node in the tree (maximum UCT value)'''
         leaf_node_found = False
         leaf_node_id = (0,) # root node id
 
@@ -68,16 +69,17 @@ class VanilaMCTS():
                         maximum_uct_value = uct_value
                         leaf_node_id = child_id
 
-        depth = len(leaf_node_id) # as node_id records selected action set
+        depth = len(leaf_node_id)
 
         return leaf_node_id, depth
 
     def expansion(self, leaf_node_id):
+        '''Create all posible outcomes from leaf nodes'''
         leaf_state = self.tree[leaf_node_id]['state']
         winner = self._is_terminal(leaf_state)
         possible_actions = self._get_valid_actions(leaf_state)
 
-        child_node_id = leaf_node_id # default value
+        child_node_id = leaf_node_id
         if winner is None:
             childs = []
             for action_set in possible_actions:
@@ -106,6 +108,7 @@ class VanilaMCTS():
         return child_node_id
 
     def _is_terminal(self, leaf_state):
+        '''Check terminal (game state)'''
         def __who_wins(leaf_state):
             if tictactoe.check_win(1,check_board=leaf_state):
                 return 1

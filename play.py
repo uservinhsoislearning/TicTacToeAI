@@ -1,9 +1,9 @@
 import constants as CONST
-import tictactoe
-import window
-import minimax_solver as ms
-import alp_beta_solver as abs
-import MCTS_solver as mts
+import Game.tictactoe as tictactoe
+import Game.window as window
+import Solvers.minimax_solver as ms
+import Solvers.alp_beta_solver as abs
+import Solvers.MCTS_solver as mts
 import pygame
 import sys
 

@@ -1,16 +1,16 @@
+import constants as CONST
 import pygame
 import sys
 import time
-import numpy as np
-import constants as CONST
 
 pygame.init()
 
 FONT = pygame.font.Font(None, 30)
 
 def GUI():
+    '''Draws the window for selecting alogrithms, then update the screen to play the main game (Tic-Tac-Toe)'''
     screen = pygame.display.set_mode((CONST.WINDOW_WIDTH, CONST.WINDOW_HEIGHT))
-    pygame.display.set_caption("Choose your desired algorithm")
+    pygame.display.set_caption("Tic-Tac-Toe AI")
 
     # Button positions
     button_1_rect = pygame.Rect((CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH - CONST.BUTTON_MARGIN, CONST.WINDOW_HEIGHT // 2 - CONST.BUTTON_HEIGHT // 2), 
@@ -35,6 +35,9 @@ def GUI():
     message = ""
     while running:
         screen.fill(CONST.WHITE)
+
+        title_text = FONT.render("Choose your desired algorithm", True, CONST.BLACK)
+        screen.blit(title_text, (CONST.WINDOW_WIDTH // 2 - title_text.get_width() // 2, 50))
 
         # Draw buttons
         pygame.draw.rect(screen, CONST.BLUE if selected_solver == "Minimax" else CONST.BLACK, button_1_rect, 2)
@@ -79,6 +82,6 @@ def GUI():
         # Update display
         pygame.display.update()
     screen = pygame.display.set_mode((CONST.GWINDOW_WIDTH, CONST.GWINDOW_HEIGHT))
-    pygame.display.set_caption(f'{selected_solver}-TicTacToeAI')
+    pygame.display.set_caption(f'Tic-Tac-Toe AI ({selected_solver})')
     screen.fill(CONST.WHITE)
     return selected_solver
