@@ -38,12 +38,13 @@ while True:
                player = player % 2 + 1
 
                if not game_over:
-                  if Solver.best_move():
-                        if value == "MCTS":
-                           Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=player)
-                        if tictactoe.check_win(2):
-                           game_over = True
-                        player = player % 2 + 1
+                  if value != "PvP Local":
+                     if Solver.best_move():
+                           if value == "MCTS":
+                              Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=player)
+                           if tictactoe.check_win(2):
+                              game_over = True
+                           player = player % 2 + 1
 
                if not game_over:
                   if tictactoe.is_board_full():

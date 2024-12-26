@@ -13,21 +13,20 @@ def GUI():
     pygame.display.set_caption("Tic-Tac-Toe AI")
 
     # Button positions
-    button_1_rect = pygame.Rect((CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH - CONST.BUTTON_MARGIN, CONST.WINDOW_HEIGHT // 2 - CONST.BUTTON_HEIGHT // 2), 
-                            (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
-    button_2_rect = pygame.Rect((CONST.WINDOW_WIDTH // 2 + CONST.BUTTON_MARGIN, CONST.WINDOW_HEIGHT // 2 - CONST.BUTTON_HEIGHT // 2), 
-                            (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
-    
     button_1_rect = pygame.Rect(
-        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 - 1.5 * CONST.BUTTON_HEIGHT - CONST.BUTTON_MARGIN),
+        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 - 1.5 * CONST.BUTTON_HEIGHT - CONST.BUTTON_MARGIN - 50),
         (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
     
     button_2_rect = pygame.Rect(
-        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 - 0.5 * CONST.BUTTON_HEIGHT),
+        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 - 0.5 * CONST.BUTTON_HEIGHT - 50),
         (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
     
     button_3_rect = pygame.Rect(
-        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 + 0.5 * CONST.BUTTON_HEIGHT + CONST.BUTTON_MARGIN),
+        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 + 0.5 * CONST.BUTTON_HEIGHT + CONST.BUTTON_MARGIN - 50),
+        (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
+    
+    button_4_rect = pygame.Rect(
+        (CONST.WINDOW_WIDTH // 2 - CONST.BUTTON_WIDTH // 2, CONST.WINDOW_HEIGHT // 2 + 1.5 * CONST.BUTTON_HEIGHT + 2 * CONST.BUTTON_MARGIN - 50),
         (CONST.BUTTON_WIDTH, CONST.BUTTON_HEIGHT))
     
     selected_solver = None
@@ -43,21 +42,24 @@ def GUI():
         pygame.draw.rect(screen, CONST.BLUE if selected_solver == "Minimax" else CONST.BLACK, button_1_rect, 2)
         pygame.draw.rect(screen, CONST.RED if selected_solver == "AlphaBeta" else CONST.BLACK, button_2_rect, 2)
         pygame.draw.rect(screen, CONST.GREEN if selected_solver == "MCTS" else CONST.BLACK, button_3_rect, 2)
+        pygame.draw.rect(screen, CONST.PURPLE if selected_solver == "PvP Local" else CONST.BLACK, button_4_rect, 2)
 
         # Button text
         text_1 = FONT.render("Minimax", True, CONST.BLACK)
         text_2 = FONT.render("AlphaBeta", True, CONST.BLACK)
         text_3 = FONT.render("MCTS", True, CONST.BLACK)
+        text_4 = FONT.render("PvP Local", True, CONST.BLACK)
 
         screen.blit(text_1, (button_1_rect.centerx - text_1.get_width() // 2, button_1_rect.centery - text_1.get_height() // 2))
         screen.blit(text_2, (button_2_rect.centerx - text_2.get_width() // 2, button_2_rect.centery - text_2.get_height() // 2))
         screen.blit(text_3, (button_3_rect.centerx - text_3.get_width() // 2, button_3_rect.centery - text_3.get_height() // 2))
+        screen.blit(text_4, (button_4_rect.centerx - text_4.get_width() // 2, button_4_rect.centery - text_4.get_height() // 2))
 
         if message:
             message_text = FONT.render(message, True, CONST.BLACK)
             screen.blit(
                 message_text,
-                (CONST.WINDOW_WIDTH // 2 - message_text.get_width() // 2, CONST.WINDOW_HEIGHT // 2 + 2.5*CONST.BUTTON_HEIGHT),
+                (CONST.WINDOW_WIDTH // 2 - message_text.get_width() // 2, CONST.WINDOW_HEIGHT // 2 + 2.5*CONST.BUTTON_HEIGHT + 20),
             )
             pygame.display.update()
 
@@ -78,10 +80,16 @@ def GUI():
                 elif button_3_rect.collidepoint(event.pos):
                     selected_solver = "MCTS"
                     message = "MCTS solver selected."
+                elif button_4_rect.collidepoint(event.pos):
+                    selected_solver = "PvP Local"
+                    message = "PvP Local mode selected."
 
         # Update display
         pygame.display.update()
     screen = pygame.display.set_mode((CONST.GWINDOW_WIDTH, CONST.GWINDOW_HEIGHT))
-    pygame.display.set_caption(f'Tic-Tac-Toe AI ({selected_solver})')
+    if selected_solver == "PvP Local":
+        pygame.display.set_caption(f'Local mode Tic-Tac-Toe')
+    else:
+        pygame.display.set_caption(f'Tic-Tac-Toe AI ({selected_solver})')
     screen.fill(CONST.WHITE)
     return selected_solver
