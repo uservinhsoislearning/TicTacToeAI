@@ -14,7 +14,8 @@ value = window.GUI()
 tictactoe.draw_lines()
 
 played_time = 1
-database = {'Play' : [], 'Time per move' : [], 'Move played': [], 'Board state' : []}
+move_number = 1
+database = {'Play' : [], 'Move No.' : [], 'Selected Algorithm' : [], 'Time per move' : [], 'Move played': [], 'Board state' : []}
 player = 1
 game_over = False
 if value == "Minimax":
@@ -47,6 +48,9 @@ while True and played_time <= 20:
                      t1 = time.time()
                      is_moveable, move = Solver.best_move()
                      t2 = time.time()
+                     database['Move No.'].append(move_number)
+                     move_number += 1
+                     database['Selected Algorithm'].append(value)
                      database['Time per move'].append(1000*(t2-t1))
                      database['Move played'].append(move)
                      database['Board state'].append(tictactoe.board.astype(int))
@@ -64,11 +68,10 @@ while True and played_time <= 20:
       if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
                tictactoe.restart_game()
+               move_number = 1
                played_time += 1
                game_over = False
                player = 1
-            if event.key == pygame.K_p:
-                pass
 
    if not game_over:
       tictactoe.draw_figures()
