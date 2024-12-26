@@ -1,6 +1,7 @@
 import constants as CONST
 import Game.tictactoe as tictactoe
-import copy 
+import copy
+import time
 
 class AlphaBeta:
     def __init__(self, AB_board, depth, is_max, alpha, beta):

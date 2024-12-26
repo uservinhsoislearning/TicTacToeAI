@@ -4,13 +4,17 @@ import Game.window as window
 import Solvers.minimax_solver as ms
 import Solvers.alp_beta_solver as abs
 import Solvers.MCTS_solver as mts
+import pandas as pd
 import pygame
 import sys
+import time
 
 value = window.GUI()
 
 tictactoe.draw_lines()
 
+played_time = 1
+database = {'Play' : [], 'Time per move' : [], 'Move played': [], 'Board state' : []}
 player = 1
 game_over = False
 if value == "Minimax":
@@ -22,7 +26,7 @@ elif value == "MCTS":
 else:
     pass
 
-while True:
+while True and played_time <= 20:
    for event in pygame.event.get():
       if event.type == pygame.QUIT:
             sys.exit()
@@ -39,13 +43,20 @@ while True:
 
                if not game_over:
                   if value != "PvP Local":
-                     if Solver.best_move():
+                     database['Play'].append(played_time)
+                     t1 = time.time()
+                     is_moveable, move = Solver.best_move()
+                     t2 = time.time()
+                     database['Time per move'].append(1000*(t2-t1))
+                     database['Move played'].append(move)
+                     database['Board state'].append(tictactoe.board.astype(int))
+                     print(tictactoe.board)
+                     if is_moveable:
                            if value == "MCTS":
                               Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=player)
                            if tictactoe.check_win(2):
                               game_over = True
                            player = player % 2 + 1
-
                if not game_over:
                   if tictactoe.is_board_full():
                         game_over = True
@@ -53,8 +64,11 @@ while True:
       if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
                tictactoe.restart_game()
+               played_time += 1
                game_over = False
                player = 1
+            if event.key == pygame.K_p:
+                pass
 
    if not game_over:
       tictactoe.draw_figures()
@@ -70,3 +84,7 @@ while True:
             tictactoe.draw_figures(CONST.BLUE)
 
    pygame.display.update()
+
+database = pd.DataFrame(database)
+print(database)
+database.to_csv('Data/MiniMax.csv', index=False)
