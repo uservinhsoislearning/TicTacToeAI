@@ -44,9 +44,9 @@ If this does not work, download VSCode and run it in VSCode. Remember to downloa
 
 If run successfully, there would be a popup window that looks like this:
 
-![image](https://github.com/user-attachments/assets/178c14b8-9cb4-4ac4-a427-c3c8edba3ef7)
+![Screenshot 2024-12-26 135655](https://github.com/user-attachments/assets/d3e6cd31-ebf7-4ff0-9a3b-9a871a764923)
 
-Click on one of the algorithms then wait for 1 second. Then the main game will go up and you can play Tic-Tac-Toe! You will always go first (as O) and the computer goes after (as X).
+Click on one of the algorithms then wait for 1 second. Then the main game will go up and you can play Tic-Tac-Toe! You will always go first (as O) and the computer goes after (as X). You can play with your friends using the PvP Local mode.
 
 The colors display the state of the game. If the game ends in a win for you, the lines are colored green. If the game ends in a loss for you, the lines are colored in red. If the game ends in a draw, the lines are covered in blue. For example,
 
@@ -60,13 +60,13 @@ Draw:
 
 Win:
 
-![image](https://github.com/user-attachments/assets/5b42eaf3-5007-4491-9f82-304930b7f88b)
+![Screenshot 2024-12-26 135722](https://github.com/user-attachments/assets/56f412a7-a4d4-4097-a95e-9b58f199fc53)
 
 While the game is running, you can press R to restart the game and click on the red X to exit the game.
 
 Demo:
 
-
+https://github.com/user-attachments/assets/71ed45bb-88b6-4c21-b50a-39bce782a61f
 
 ## References
 [Tic-Tac-Toe game and MiniMax algorithm](https://www.youtube.com/watch?v=LbTu0rwikwg&t=1946s)
