@@ -132,8 +132,7 @@ class VanilaMCTS():
 
     def _get_valid_actions(self, leaf_state):
         '''
-        out:
-        - set of possible actions ((row,col), action_idx)
+        Return all possible action in current state
         '''
         actions = []
         count = 0
@@ -147,11 +146,7 @@ class VanilaMCTS():
 
     def simulation(self, child_node_id):
         '''
-        simulate game from child node's state until it reaches the resulting state of the game.
-        in:
-        - child node id (randomly selected child node id from `expansion`)
-        out:
-        - winner ('o', 'x', 'draw')
+        Simulate game until the game ends (in a loss, win or draw)
         '''
         self.total_n += 1
         state = copy.deepcopy(self.tree[child_node_id]['state'])
@@ -179,7 +174,9 @@ class VanilaMCTS():
         return winner
 
     def backprop(self, child_node_id, winner):
-
+        '''
+        Backpropagate the result to the previous nodes of the state tree
+        '''
         if winner == 'draw':
             reward = 0
         elif winner == 2:
@@ -203,6 +200,7 @@ class VanilaMCTS():
                 node_id = parent_id
 
     def best_move(self):
+        '''Play the best move according to the selected algorithm'''
         best_q = CONST.MIN
         move = (-1,-1)
 
