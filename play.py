@@ -27,7 +27,7 @@ elif value == "MCTS":
 else:
     pass
 
-while True and played_time <= 10:
+while True and played_time <= 20:
    for event in pygame.event.get():
       if event.type == pygame.QUIT:
             sys.exit()
@@ -90,4 +90,4 @@ while True and played_time <= 10:
 
 database = pd.DataFrame(database)
 print(database)
-database.to_csv('Data/AlphaBeta.csv', index=False)
+database.to_csv('Data/MCTS.csv', index=False)

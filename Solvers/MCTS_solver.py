@@ -237,24 +237,24 @@ class VanilaMCTS():
 
         if move != (-1,-1):
             tictactoe.mark_square(move[0], move[1], 2)
-            fig = plt.figure(figsize=(5,5))
-            for a in action_candidates:
+            # fig = plt.figure(figsize=(5,5))
+            # for a in action_candidates:
 
-                _node = self.tree[(0,)+(a,)]
-                _state = copy.deepcopy(_node['state'])
+            #     _node = self.tree[(0,)+(a,)]
+            #     _state = copy.deepcopy(_node['state'])
 
-                _q = _node['q']
+            #     _q = _node['q']
 
-                plt.subplot(len(_state),len(_state),a+1)
-                plt.pcolormesh(_state, alpha=0.7, cmap="RdBu")
-                plt.axis('equal')
-                plt.gca().invert_yaxis()
-                plt.xticks([], [])
-                plt.yticks([], [])
-                plt.title('[%d] q=%.2f' % (a,_q))
-            plt.draw()
-            plt.waitforbuttonpress(0)
-            plt.close(fig)
+            #     plt.subplot(len(_state),len(_state),a+1)
+            #     plt.pcolormesh(_state, alpha=0.7, cmap="RdBu")
+            #     plt.axis('equal')
+            #     plt.gca().invert_yaxis()
+            #     plt.xticks([], [])
+            #     plt.yticks([], [])
+            #     plt.title('[%d] q=%.2f' % (a,_q))
+            # plt.draw()
+            # plt.waitforbuttonpress(0)
+            # plt.close(fig)
             return True, move
         
         return False, None
