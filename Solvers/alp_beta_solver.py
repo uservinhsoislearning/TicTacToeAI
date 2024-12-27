@@ -80,5 +80,5 @@ class AlphaBeta:
         
         if move != (-1,-1):
             tictactoe.mark_square(move[0], move[1], 2)
-            return True
-        return False
+            return True, move
+        return False, None

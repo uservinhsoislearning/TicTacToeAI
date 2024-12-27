@@ -90,4 +90,4 @@ while True and played_time <= 20:
 
 database = pd.DataFrame(database)
 print(database)
-database.to_csv('Data/MiniMax.csv', index=False)
+database.to_csv('Data/AlphaBeta.csv', index=False)
