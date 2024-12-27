@@ -27,7 +27,7 @@ elif value == "MCTS":
 else:
     pass
 
-while True and played_time <= 20:
+while True and played_time <= 10:
    for event in pygame.event.get():
       if event.type == pygame.QUIT:
             sys.exit()
