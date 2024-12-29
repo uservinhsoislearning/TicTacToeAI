@@ -1,7 +1,6 @@
 import constants as CONST
 import Game.tictactoe as tictactoe
 import copy
-import matplotlib.pyplot as plt
 import numpy as np
 
 class policy():

@@ -34,6 +34,7 @@ class Minimax:
                         self.minimax_board[row][col] = 2
                         self.depth += 1
                         self.is_max = False
+                        print(f"Depth: {self.depth} - Max Board: {self.minimax_board}")
                         score = self.solve()
                         self.minimax_board[row][col] = 0
                         best_score = max(score, best_score)
@@ -46,6 +47,7 @@ class Minimax:
                         self.minimax_board[row][col] = 1
                         self.depth += 1
                         self.is_max = True
+                        print(f"Depth: {self.depth} - Min Board: {self.minimax_board}")
                         score = self.solve()
                         self.minimax_board[row][col] = 0
                         best_score = min(score, best_score)
@@ -68,5 +70,6 @@ class Minimax:
 
         if move != (-1,-1):
             tictactoe.mark_square(move[0], move[1], 2)
+            print("-------------------------Done-------------------------")
             return True, move
         return False, None

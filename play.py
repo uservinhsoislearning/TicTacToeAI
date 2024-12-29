@@ -54,7 +54,6 @@ while True and played_time <= 20:
                      database['Time per move'].append(1000*(t2-t1))
                      database['Move played'].append(move)
                      database['Board state'].append(tictactoe.board.astype(int))
-                     print(tictactoe.board)
                      if is_moveable:
                            if value == "MCTS":
                               Solver = mts.VanilaMCTS(n_iterations=1500, depth=15, exploration_constant=100, game_board=tictactoe.board, player=player)

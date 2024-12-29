@@ -77,3 +77,4 @@ def restart_game():
     for row in range(CONST.BOARD_ROWS):
         for col in range(CONST.BOARD_COLS): 
             board[row][col] = 0
+            
