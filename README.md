@@ -1,6 +1,6 @@
 # TicTacToeAI - A Tic-Tac-Toe solver using AI algorithms
 
-This repository is my project for the course IT3160E(Introduction to Artificial Intelligence). The project aims to build an unbeatable solver for the classic game of Tic-Tac-Toe, as well as testing Monte Carlo Tree Search for this game (which is not commonly used for 3x3 Tic-Tac-Toe).
+This repository is my project for the course IT3160E(Introduction to Artificial Intelligence). The project aims to build an unbeatable solver for the classic game of Tic-Tac-Toe and test Monte Carlo Tree Search for this game (which is not commonly used for 3x3 Tic-Tac-Toe).
 
 Here are the algorithms implemented in this project:
 
@@ -10,7 +10,7 @@ Here are the algorithms implemented in this project:
 
 - Monte Carlo Tree Search algorithm
 
-This project runs on Python 3.10.6, and the GUI was done in the pygame library. This means that it would produce __ pycache __ files, so while running if any __ pycache __ files are created, please ignore it.
+This project runs on Python 3.10.6, and the GUI was done in the Pygame library. This means that it would produce __ pycache __ files, so while running if any __ pycache __ files are created, please ignore it.
 
 ### Requirements
 
@@ -25,7 +25,7 @@ There are 2 versions on my GitHub repository. I call them User Mode and Develope
 ```
 git checkout DeveloperMode
 ```
-However, it is purely used to understand the algorithms deeper, so if you only want to beat your friends in a game of Tic-Tac-Toe, then accessing Developer Mode is unnecessary.
+However, it is purely used to understand the algorithms deeper, so if you only want to beat your friends in a game of Tic-Tac-Toe, accessing Developer Mode is unnecessary.
 
 You can go back from DeveloperMode by using this command:
 ```
@@ -40,9 +40,9 @@ To play Tic-Tac-Toe, you need to run the play.py file. You can do so by running 
 python play.py
 ```
 
-If this does not work, download VSCode and run it in VSCode. Remember to download the libraries in requirement.txt.
+If this does not work, download VSCode and run the play.py file in VSCode. Remember to download the libraries in requirement.txt.
 
-If run successfully, there would be a popup window that looks like this:
+If runs successfully, there will be a popup window that looks like this:
 
 ![Screenshot 2024-12-26 135655](https://github.com/user-attachments/assets/d3e6cd31-ebf7-4ff0-9a3b-9a871a764923)
 
