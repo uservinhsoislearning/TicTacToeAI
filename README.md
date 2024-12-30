@@ -68,7 +68,7 @@ Demo:
 
 https://github.com/user-attachments/assets/71ed45bb-88b6-4c21-b50a-39bce782a61f
 
-## References
+## Acknowledgement
 [Tic-Tac-Toe game and MiniMax algorithm](https://www.youtube.com/watch?v=LbTu0rwikwg&t=1946s)
 
 [MCTS implementation](https://github.com/hayoung-kim/mcts-tic-tac-toe)
